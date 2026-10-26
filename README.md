@@ -28,7 +28,8 @@ outdoor-lighting-advisor/
 │   ├── parameter_calcs.md          # 参数配比：公式、太阳能配比、压降、防虚标区间
 │   ├── knowledge_primer.md         # 灯具知识科普手册（面向客户讲解）
 │   ├── troubleshooting.md          # 故障诊断手册
-│   └── company_products.md         # 厂商信息（仅在被明确询问时启用）
+│   ├── company_products.md         # 厂商信息（仅在被明确询问时启用）
+│   └── universal_prompt.md         # 通用版提示词（各对话平台粘贴即用）
 └── scripts/
     └── lighting_calc.py            # 计算工具：lumen / solar / pole 三个子命令
 ```
@@ -41,19 +42,16 @@ outdoor-lighting-advisor/
 
 把 `outdoor-lighting-advisor` 文件夹整个放进技能目录：
 
-```bash
-# WorkBuddy / CodeBuddy
-~/.codebuddy/skills/
-
-# Claude Code
-~/.claude/skills/
+```
+~/.codebuddy/skills/     # WorkBuddy / CodeBuddy
+~/.claude/skills/        # Claude Code
 ```
 
-或下载本仓库根目录的 `outdoor-lighting-advisor.skill` 包直接导入。
+或下载仓库根目录的 `outdoor-lighting-advisor.skill` 包直接导入。
 
 ### 方式二：豆包 / 元宝 / 千问 / DeepSeek 等对话平台
 
-这些平台不支持 Skill 包导入，但支持创建自定义智能体。把 `references/户外照明选型顾问-通用版提示词.md` 的全文粘贴进智能体的「角色设定 / 提示词」栏即可，四家平台通用。
+这些平台不支持 Skill 包导入，但支持创建自定义智能体。把 `references/universal_prompt.md` 的全文粘贴进智能体的「角色设定 / 提示词」栏即可，四家平台通用。
 
 ### 方式三：直接运行计算脚本
 
@@ -68,6 +66,18 @@ python3 scripts/lighting_calc.py solar --load-w 60 --hours 8 --sun-hours 4 --rai
 
 # 杆高与间距、布灯方式
 python3 scripts/lighting_calc.py pole --road-width 8 --pole-height 8
+```
+
+示例输出：
+
+```
+照明面积        : 2000.0 m²
+目标维持照度    : 20.0 lx
+所需总光通量    : 40000 lm
+单灯有效光通量  : 8960 lm (CU=0.7, MF=0.8)
+理论灯数        : 4.46
+建议安装数量    : 5 套
+安装后预估照度  : 22.4 lx
 ```
 
 ---
